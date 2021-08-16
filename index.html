@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <script src="canvas.js"></script> -->
+    <title>Document</title>
+</head>
+<body>
+<script>
+var ctx, canvas,canvasWp,canvasHp,circleW,circleH,textW,textH,textCenter;
+var ctx2, canvas2;
+
+
+window.onload = function(){
+
+canvas = document.getElementById('logo');
+ctx = canvas.getContext('2d');
+
+//sizes
+canvasWp = canvas.width / 100;
+canvasHp = canvas.height / 100;
+
+circleW = canvasWp * 11.1111111;
+circleH = canvasHp * 11.1111111;
+
+
+
+//cords for letters
+var f = 
+[
+[10.36, 216.73], 
+[10.36, 178.93], 
+[43.62, 178.93], 
+[10.36, 178.93]
+];
+var f2 = 
+[
+[10.36, 216.73], 
+[10.36, 178.93], 
+[10.36,  162], 
+[10.36, 138.62, 42.11,138.62, 42.11, 162]
+];
+
+var r = 
+[
+[58, 216.73], 
+[58, 186.35], 
+[58, 161.94, 89.84, 161.94, 89.84, 186.35]
+
+];
+
+var o = 
+[
+[129.5, 210], 
+[100.75, 210, 100.75, 169.04, 129.5, 169.04],
+[158.21, 169.04, 158.21, 210, 129.5, 210]
+
+];
+
+var n = 
+[
+[172, 216.73], 
+[172, 186.35],
+[172, 161.94, 208.5, 161.94, 208.5, 186.35],
+[208.5, 216.73]
+];
+
+var t = 
+[
+[261.13, 194.02], 
+[261.13, 195.64],
+[261.13, 214.1, 232.62, 214.1, 232.62, 195.64],
+[232.62, 169.83],
+[266, 169.83]
+];
+
+var t2 = 
+[
+[261.13, 194.02], 
+[261.13, 195.64],
+[261.13, 214.1, 232.62, 214.1, 232.62, 195.64],
+[232.55, 169.83],
+[232.55,146.18]
+];
+
+var i = 
+[
+[284.13, 216.73], 
+[284.13, 162.35]
+];
+
+var dot = 
+[
+[284.13, 153], 
+[278, 153, 278, 142, 284.13, 143],
+[290, 143, 290, 153, 284.13, 153]
+];
+
+var o2 = 
+[
+[328.41, 210], 
+[299.69, 210, 299.69, 169.04, 328.41, 169.04],
+[357.14, 169.04, 357.14, 210, 328.41, 210]
+];
+
+
+
+// var circle = 
+// [
+//     [30, 180], 
+//     [30, 30, 180, 30, 150],
+//     [330, 30,  329, 330, 150],
+//     [330, 330, 180, 330, 150],
+//     [30, 330, 30, 180, 150],
+// ];
+
+// //circle barva
+// var gradient = ctx.createLinearGradient(200,250,100, 335);
+// gradient.addColorStop(0, '#594B9A');
+// gradient.addColorStop(0.8, '#54C0EE');
+// gradient.addColorStop(1, '#fff');
+
+
+var render = {
+"2"(p) { ctx.lineTo(...p) },
+"4"(p) { ctx.quadraticCurveTo(...p) },   
+"5"(p) { ctx.arcTo(...p) },  
+"6"(p) { ctx.bezierCurveTo(...p) },   
+start(width, col) { ctx.lineWidth = width; ctx.strokeStyle = col; ctx.beginPath() }
+}
+
+
+var startTime;
+var stopTime;
+var len = 150;  //180;
+
+//f
+function loopF(time) {
+if(!startTime){ 
+    startTime = time;
+}
+var animTime = time - startTime;
+stopTime = (animTime / 2.5) % len;
+
+ctx.clearRect(0, 0, 360, 360);
+
+ctx.setLineDash([stopTime, 10000]);
+render.start(16.2, "white")
+f2.forEach(f2 => render[f2.length](f2));
+ctx.stroke();
+
+ctx.setLineDash([stopTime, 10000]);
+render.start(16.2, "white")
+f.forEach(f => render[f.length](f));
+ctx.stroke();
+
+
+if(stopTime < (len - 5)){
+  
+}
+
+ if (stopTime >= (len - 5)) {
+    window.cancelAnimationFrame(fletter);
+    } else{
+        window.requestAnimationFrame(loopF)
+    }
+};
+var fletter = window.requestAnimationFrame(loopF);
+
+//r
+window.setTimeout(function(){
+    startTime = null;
+    function loopR(time) {
+        if(!startTime){ startTime = time }
+        var animTime = time - startTime;
+        stopTime = (animTime / 2.5) % len;
+        ctx.clearRect(0, 0, 360, 360);
+        //f
+        ctx.setLineDash([]);
+        render.start(16.2, "white")
+        f2.forEach(f2 => render[f2.length](f2));
+        ctx.stroke();
+
+        render.start(16.2, "white")
+        f.forEach(f => render[f.length](f));
+        ctx.stroke();
+
+        //r
+        ctx.setLineDash([stopTime, 10000]);
+        render.start(16.2, "white")
+        r.forEach(r => render[r.length](r));
+        ctx.stroke();
+
+
+ if (stopTime >= (len - 5)) {
+    window.cancelAnimationFrame(rletter);
+    } else{
+        window.requestAnimationFrame(loopR)
+    }
+};
+var rletter = window.requestAnimationFrame(loopR);
+
+}, 287.5);
+
+//o
+window.setTimeout(function(){
+    startTime = null;
+    function loopO(time) {
+        if(!startTime){ startTime = time }
+        var animTime = time - startTime;
+        stopTime = (animTime / 2.5) % len;
+        ctx.clearRect(0, 0, 360, 360);
+
+        //f
+        ctx.setLineDash([]);
+        render.start(16.2, "white")
+        f2.forEach(f2 => render[f2.length](f2));
+        ctx.stroke();
+
+        render.start(16.2, "white")
+        f.forEach(f => render[f.length](f));
+        ctx.stroke();
+        //r
+        render.start(16.2, "white")
+        r.forEach(r => render[r.length](r));
+        ctx.stroke();
+        //o
+        ctx.setLineDash([stopTime, 10000]);
+        render.start(16.2, "white")
+        o.forEach(o => render[o.length](o));
+        ctx.stroke();
+
+ if (stopTime >= (len - 5)) {
+    window.cancelAnimationFrame(oletter);
+    } else{
+        window.requestAnimationFrame(loopO)
+    }
+};
+var oletter = window.requestAnimationFrame(loopO);
+
+}, 562.5);
+        
+//n
+window.setTimeout(function(){
+    startTime = null;
+    function loopN(time) {
+        if(!startTime){ startTime = time }
+        var animTime = time - startTime;
+        stopTime = (animTime / 2.5) % len;
+
+        ctx.clearRect(0, 0, 360, 360);
+
+        //f
+        ctx.setLineDash([]);
+        render.start(16.2, "white")
+        f2.forEach(f2 => render[f2.length](f2));
+        ctx.stroke();
+
+        render.start(16.2, "white")
+        f.forEach(f => render[f.length](f));
+        ctx.stroke();
+        //r
+        render.start(16.2, "white")
+        r.forEach(r => render[r.length](r));
+        ctx.stroke();
+        //o
+        render.start(16.2, "white")
+        o.forEach(o => render[o.length](o));
+        ctx.stroke();
+
+        //N
+        ctx.setLineDash([stopTime, 10000]);
+        render.start(16.2, "white")
+        n.forEach(n => render[n.length](n));
+        ctx.stroke();
+
+ if (stopTime >= (len - 5)) {
+    window.cancelAnimationFrame(nletter);
+    } else{
+        window.requestAnimationFrame(loopN)
+    }
+};
+var nletter = window.requestAnimationFrame(loopN);
+
+}, 875);
+
+
+//t
+window.setTimeout(function(){
+    startTime = null;
+    function loopT(time) {
+        if(!startTime){ startTime = time }
+        var animTime = time - startTime;
+        stopTime = (animTime / 2.5) % len;
+        ctx.clearRect(0, 0, 360, 360);
+
+        //f
+        ctx.setLineDash([]);
+        render.start(16.2, "white")
+        f2.forEach(f2 => render[f2.length](f2));
+        ctx.stroke();
+
+        render.start(16.2, "white")
+        f.forEach(f => render[f.length](f));
+        ctx.stroke();
+        //r
+        render.start(16.2, "white")
+        r.forEach(r => render[r.length](r));
+        ctx.stroke();
+        //o
+        render.start(16.2, "white")
+        o.forEach(o => render[o.length](o));
+        ctx.stroke();
+        //N
+        render.start(16.2, "white")
+        n.forEach(n => render[n.length](n));
+        ctx.stroke();
+        //t
+        ctx.setLineDash([stopTime, 10000]);
+        render.start(16.2, "white")
+        t2.forEach(t2 => render[t2.length](t2));
+        ctx.stroke();
+
+        render.start(16.2, "white")
+        t.forEach(t => render[t.length](t));
+        ctx.stroke();
+
+ if (stopTime >= (len - 5)) {
+    window.cancelAnimationFrame(tletter);
+    } else{
+        window.requestAnimationFrame(loopT)
+    }
+};
+var tletter = window.requestAnimationFrame(loopT);
+
+}, 1137.5);
+
+
+//i + dot
+window.setTimeout(function(){
+    startTime = null;
+    function loopI(time) {
+        if(!startTime){ startTime = time }
+        var animTime = time - startTime;
+        stopTime = (animTime / 2.5) % len;
+        ctx.clearRect(0, 0, 360, 360);
+        //f
+        ctx.setLineDash([]);
+        render.start(16.2, "white")
+        f2.forEach(f2 => render[f2.length](f2));
+        ctx.stroke();
+
+        render.start(16.2, "white")
+        f.forEach(f => render[f.length](f));
+        ctx.stroke();
+        //r
+        render.start(16.2, "white")
+        r.forEach(r => render[r.length](r));
+        ctx.stroke();
+        //o
+        render.start(16.2, "white")
+        o.forEach(o => render[o.length](o));
+        ctx.stroke();
+        //N
+        render.start(16.2, "white")
+        n.forEach(n => render[n.length](n));
+        ctx.stroke();
+        //t
+        render.start(16.2, "white")
+        t2.forEach(t2 => render[t2.length](t2));
+        ctx.stroke();
+
+        render.start(16.2, "white")
+        t.forEach(t => render[t.length](t));
+        ctx.stroke();
+        //i + dot
+        ctx.setLineDash([(animTime / 10) % len, 10000]);
+        render.start(10, "white")
+        dot.forEach(d => render[d.length](d));
+        ctx.stroke();
+
+        ctx.setLineDash([stopTime, 10000]);
+        render.start(16.2, "white")
+        i.forEach(i => render[i.length](i));
+        ctx.stroke();
+
+ if (stopTime >= (len - 5)) {
+    window.cancelAnimationFrame(iletter);
+    } else{
+        window.requestAnimationFrame(loopI)
+    }
+};
+var iletter = window.requestAnimationFrame(loopI);
+
+}, 1412.5);
+
+//o2
+window.setTimeout(function(){
+    startTime = null;
+    function loopO2(time) {
+        if(!startTime){ startTime = time }
+        var animTime = time - startTime;
+        stopTime = (animTime / 2.5) % len;
+        ctx.clearRect(0, 0, 360, 360);
+
+        //f
+        ctx.setLineDash([]);
+        render.start(16.2, "white")
+        f2.forEach(f2 => render[f2.length](f2));
+        ctx.stroke();
+
+        render.start(16.2, "white")
+        f.forEach(f => render[f.length](f));
+        ctx.stroke();
+        //r
+        render.start(16.2, "white")
+        r.forEach(r => render[r.length](r));
+        ctx.stroke();
+        //o
+        render.start(16.2, "white")
+        o.forEach(o => render[o.length](o));
+        ctx.stroke();
+        //N
+        render.start(16.2, "white")
+        n.forEach(n => render[n.length](n));
+        ctx.stroke();
+        //t
+        render.start(16.2, "white")
+        t2.forEach(t2 => render[t2.length](t2));
+        ctx.stroke();
+
+        render.start(16.2, "white")
+        t.forEach(t => render[t.length](t));
+        ctx.stroke();
+        //i + dot
+        render.start(10, "white")
+        dot.forEach(d => render[d.length](d));
+        ctx.stroke();
+
+        render.start(16.2, "white")
+        i.forEach(i => render[i.length](i));
+        ctx.stroke();
+        //o2
+        ctx.setLineDash([stopTime, 10000]);
+        render.start(16.2, "white")
+        o2.forEach(o2 => render[o2.length](o2));
+        ctx.stroke();
+
+ if (stopTime >= (len - 5)) {
+    window.cancelAnimationFrame(o2letter);
+    } else{
+        window.requestAnimationFrame(loopO2)
+    }
+};
+var o2letter = window.requestAnimationFrame(loopO2);
+}, 1700);
+
+
+//Timeout for fadeIn circle
+window.setTimeout(function(){
+len = 180;  //delka intervalu
+//circle rotaion and fadeIN
+var circle = new Image();
+
+function draw(){
+    circle.onload = function(){
+        setInterval(circleDraw,10);
+    }
+    circle.src = "logo-circle.svg";
+}
+draw();
+
+//fadování Cirlu
+var i = 0;
+var alpha = 0;
+var fadeIn = true;
+
+function circleDraw() {
+    i += 1;
+      
+        if(fadeIn){
+            alpha += .004 ;
+            if(alpha >= 1){
+                alpha = 1;
+                fadeIn = false;
+            }
+        }
+    drawRotatedImage(circle, canvas.width / 2,canvas.height / 2, canvas.width - circleW, canvas.height - circleH, i, alpha);
+}
+
+
+// Finální animace (rotování) + text
+var TO_RADIANS = Math.PI/180; 
+function drawRotatedImage(image, x, y, width, height, angle, alpha) { 
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    ctx.clearRect(0,0, canvas.width, canvas.height);
+    ctx.translate(x,y);
+    ctx.rotate(angle * TO_RADIANS);
+    ctx.drawImage(image, -width/2, -height/2, width, height);
+    ctx.restore(); 
+
+    ctx.save();
+    ctx.translate(0,0);
+    ctx.rotate(0);
+    ctx.globalAlpha = 1;
+
+    // draw the complete line
+    ctx.lineWidth = 16.2;
+    ctx.strokeStyle = "white";
+
+    //F
+    ctx.beginPath();
+    ctx.moveTo(10.36, 216.73);
+    ctx.lineTo(10.36, 178.93);
+    ctx.lineTo(43.62, 178.93);
+    ctx.lineTo(10.36, 178.93);
+    ctx.lineTo(10.36, 162);
+    ctx.bezierCurveTo(10.36, 138.62, 42.11, 138.62, 42.11, 162);
+    ctx.stroke();
+
+    //R
+    ctx.beginPath();
+    ctx.moveTo(58, 216.73);
+    ctx.lineTo(58, 186.35);
+    ctx.bezierCurveTo(58, 161.94, 89.84, 161.94, 89.84, 186.35);
+    ctx.stroke();
+
+    //O 
+    ctx.beginPath();
+    ctx.moveTo(129.5, 210);
+    ctx.bezierCurveTo(100.75, 210, 100.75, 169.04, 129.5, 169.04);
+    ctx.bezierCurveTo(158.21, 169.04, 158.21, 210, 129.5, 210);
+    ctx.stroke();
+
+    //N
+    ctx.beginPath();
+    ctx.moveTo(172, 216.73);
+    ctx.lineTo(172, 186.35);
+    ctx.bezierCurveTo(172, 161.94, 208.5, 161.94, 208.5, 186.35);
+    ctx.lineTo(208.5, 216.73);
+    ctx.stroke();
+
+    //T
+    ctx.beginPath();
+    ctx.moveTo(261.13, 194.02);
+    ctx.lineTo(261.13, 195.64)
+    ctx.bezierCurveTo(261.13, 214.1, 232.62, 214.1, 232.62, 195.64);
+    ctx.lineTo(232.62, 169.83);
+    ctx.lineTo(266, 169.83);
+    ctx.lineTo(232.62, 169.83);
+    ctx.lineTo(232.62,146.18);
+    ctx.stroke();
+
+    //I
+    ctx.beginPath();
+    ctx.moveTo(284.13, 216.73);
+    ctx.lineTo(284.13, 162.35);
+    ctx.stroke();
+
+    ctx.lineWidth = 10;
+    //dot 2
+    ctx.beginPath();
+    ctx.moveTo(284.13, 153);
+    ctx.bezierCurveTo(278, 153, 278, 142, 284.13, 143);
+    ctx.bezierCurveTo(290, 143, 290, 153, 284.13, 153);
+    ctx.stroke();
+
+    ctx.lineWidth = 16.2;
+    //O
+    ctx.beginPath();
+    ctx.moveTo(328.41, 210);
+    ctx.bezierCurveTo(299.69, 210, 299.69, 169.04, 328.41, 169.04);
+    ctx.bezierCurveTo(357.14, 169.04, 357.14, 210, 328.41, 210);
+    ctx.stroke();
+
+
+    ctx.globalAlpha = alpha;
+    ctx.restore(); 
+    }
+}, 1975); //timeout end
+};
+</script>
+    <style>
+    body{
+       background-color: black;
+    }
+    </style>
+    <canvas id="logo" height="360" width="360"></canvas>
+</body>
+</html>
+
